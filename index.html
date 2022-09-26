@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./main.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Biblioteca</h1>
+    </header>
+    <main>
+        <button class="button" id="add-book-btn">+ libro</button>
+        <div class="library">
+        </div>
+    </main>
+
+    <dialog id="form-modal">
+        <div class="modal-title">
+            <img src="./img/bookmark.svg">
+            <h2>Nuevo libro</h2>
+        </div>
+        <form method="dialog">
+            <fieldset>
+                <label for="book-title">Titulo</label>
+                <input type="text" id="book-title" name="book-title" required>
+            </fieldset>
+            <fieldset>
+                <label for="book-author">Autor</label>
+                <input type="text" id="book-author" name="book-author" required>
+            </fieldset>
+            <fieldset>
+                <label for="book-pages">N° páginas</label>
+                <input type="number" id="book-pages" name="book-pages" required>
+            </fieldset>
+            <fieldset>
+                <label for="is-read">¿Lo has leído?</label>
+                <input type="checkbox" name="is-read" id="is-read">
+            </fieldset>
+            <div class="modal-buttons">
+                <button type="button" id="close-modal">Cancelar</button>
+                <button type="submit" id="submit-modal">Crear libro</button>
+            </div>
+        </form>
+    </dialog>
+</body>
+</html>

@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap');
+/*font-family: 'Cedarville Cursive', cursive;*/
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+/*font-family: 'Lato', sans-serif;*/
+@import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
+/*font-family: 'Lora', serif;*/
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%;
+}
+body {
+    min-height: 100%;
+    background-image: url('./img/books.jpg');
+    background-position: center 80%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #000007;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+}
+
+.button {
+    border: none;
+    font-family: inherit;
+    cursor: pointer;
+}
+.button:hover {
+    transition: all 0.3s ease;
+}
+
+/*
+HEADER
+*/
+header {
+    background-color: rgba(99, 46, 10, 0.6);
+    font-family: 'Cedarville Cursive', cursive;
+    font-size: 1.5rem;
+    color: white;
+    padding: 0 2.5rem;
+}
+
+/*
+MAIN
+*/
+main {
+    padding: 1rem;
+}
+main #add-book-btn {
+    display: block;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    border-radius: 2rem;
+    font-size: 1.4rem;
+    background-color: rgb(46, 23, 6);
+    color: white;
+}
+main #add-book-btn:hover {
+    color: rgb(46, 23, 6);
+    background-color: white;
+}
+
+main .library {
+    margin-top: 1rem;
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}
+.book {
+    background-color: white;
+    border-radius: 10px;
+    padding: 0.5rem 1rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+}
+.book .close-btn {
+    align-self: end;
+    background-color: inherit;
+    background-image: url('./img/close.svg');
+    background-size: cover;
+    background-position: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+.book .close-btn:hover {
+    background-color: rgba(46, 43, 43, 0.2);
+}
+.book .book-title {
+    font-size: 1.5rem;
+    font-family: 'Lora', serif;
+}
+.book .book-author {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    font-family: 'Lora', serif;
+}
+.book .book-read {
+    flex: 1;
+    margin-bottom: 2rem;
+}
+.book .read-btn {
+    margin-top: 1rem;
+    padding: 5px;
+    font-size: 1rem;
+    border-radius: 20px;
+    background-color: rgb(28, 110, 28);
+    color: white;
+}
+.book .read-btn:hover {
+    color: rgb(28, 110, 28);
+    background-color: white;
+}
+
+/*
+MODAL
+*/
+#form-modal {
+    width: min(90vw, 600px);
+    margin: 0 auto;
+    top: 2rem;
+    border: none;
+    border-radius: 20px;
+    padding: 1rem;
+}
+#form-modal::backdrop {
+    background-color: rgba(0,0,0,0.55);
+}
+#form-modal .modal-title {
+   display: flex;
+   align-items: center;
+   gap: 0.5rem;
+   margin-bottom: 0.5rem;
+}
+#form-modal .modal-title h2 {
+    font-weight: 400;
+}
+#form-modal fieldset {
+    padding: 1rem;
+    border: none;
+    border-radius: 20px;
+    margin-bottom: .5rem;
+    background-color: rgba(235, 179, 107, 0.555);
+}
+#form-modal fieldset label {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+}
+#form-modal fieldset input {
+    display: block;
+    padding: 0.5rem;
+    border-radius: 10px;
+    border: 1px solid rgba(100, 94, 94, 0.616);
+}
+#form-modal fieldset:last-of-type {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+#form-modal fieldset:last-of-type label {
+    margin: 0;
+}
+#form-modal .modal-buttons {
+    display: flex;
+}
+#form-modal button {
+    flex: 1;
+    padding: 0.5rem 1rem;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+#form-modal button:first-of-type {
+    background-color: #cf1818;
+    color: white;
+}
+#form-modal button:first-of-type:hover {
+    background-color: #860d0d;
+}
+#form-modal button:last-of-type {
+    background-color: #1c6e1c;
+    color: white;
+}
+#form-modal button:last-of-type:hover {
+    background-color: #0b550b;
+}
