@@ -1,75 +1,63 @@
-function Library() {
-    this.libraryElement = document.querySelector(".library");
-}
-Library.prototype.addBookToLibrary = function(bookName, bookAuthor, bookPages, bookRead) {
-    const newBook = new Book(bookName, bookAuthor, bookPages, bookRead);
-    this.showBook(newBook);
-}
-Library.prototype.showBook = function(book) {
-    this.libraryElement.appendChild(book.HTMLelement);
-}
+class Library {
+  constructor(selector) {
+    this.HTML = document.querySelector(selector);
+    this.books = [];
+  };
+  addBook(book) {
+    this.HTML.appendChild(book.HTML);
+    this.books.push(book);
+  };
+};
 
-function Book(name, author, pages, read) {
+class Book {
+  constructor(name, author, pages, read) {
     this.name = name;
     this.author = author;
     this.pages = pages;
     this.read = read;
-    this.createElement();
-}
-Book.prototype.getPages = function() {
-    return `${this.pages} páginas`;
-}
-Book.prototype.getRead = function() {
-    return `${this.read ? 'Ya lo leíste' : 'Aún no leído'}`;
-}
-Book.prototype.createElement = function() {
+    this.HTML = this.createElement();
+  };
+  createElement() {
     const book = document.createElement("div");
     book.classList.add("book");
-    const removeBtn = document.createElement("button");
-    removeBtn.classList.add("close-btn");
-    removeBtn.addEventListener("click", () => {
-        this.remove();
-    })
-    const bookTitle = document.createElement("div");
-    bookTitle.classList.add("book-title");
-    bookTitle.textContent = this.name;
-    const bookAuthor = document.createElement("div");
-    bookAuthor.classList.add("book-author");
-    bookAuthor.textContent = this.author;
-    const bookPages = document.createElement("div");
-    bookPages.classList.add("book-pages");
-    bookPages.textContent = this.getPages();
-    const bookRead = document.createElement("div");
-    bookRead.classList.add("book-read");
-    bookRead.textContent = this.getRead();
-    book.appendChild(removeBtn);
-    book.appendChild(bookTitle);
-    book.appendChild(bookAuthor);
-    book.appendChild(bookPages);
-    book.appendChild(bookRead);
-    if (!this.read) {
-        const readBtn = document.createElement("button");
-        readBtn.classList.add("button", "read-btn");
-        readBtn.textContent = "Leer";
-        readBtn.addEventListener("click", () => {
-            this.readBook();
-        } )
-        book.appendChild(readBtn);
-    }
-    this.HTMLelement = book;
-}
-Book.prototype.readBook = function() {
-    if (this.read) return;
-    this.HTMLelement.querySelector(".read-btn").remove();
+    book.innerHTML = 
+    `<button class="close-btn"></button>
+    <div class="book-title">${this.name}</div>
+    <div class="book-author">${this.author}</div>
+    <div class="book-pages">${this.pages} páginas</div>
+    <div class="book-read">${this.read ? "Ya leído" : "Aún no leído"}</div>`.trim();
+    if(!this.read) {
+      const readBtn = document.createElement("button");
+      readBtn.classList.add("button", "read-btn");
+      readBtn.textContent = "Leer";
+      book.appendChild(readBtn);
+    };
+    this.addListeners(book);
+    return book;
+  };
+  removeElement() {
+    this.HTML.remove();
+  };
+  readBook() {
+    this.HTML.querySelector(".read-btn").remove();
     this.read = true;
-    this.HTMLelement.querySelector(".book-read").textContent = this.getRead();
-}
-Book.prototype.remove = function() {
-    this.HTMLelement.remove();
-}
+    this.HTML.querySelector(".book-read").textContent = "Ya leído";
+  };
+  addListeners(HTMLbook) {
+    const closeBtn = HTMLbook.querySelector(".close-btn");
+    closeBtn.addEventListener("click", () => {
+      this.removeElement();
+    });
+    if(!this.read) {
+      const readBtn = HTMLbook.querySelector(".read-btn");
+      readBtn.addEventListener("click", () => {
+        this.readBook();
+      });
+    };
+  };
+};
 
-const myLibrary = new Library();
-
+const myLibrary = new Library(".library");
 const formModal = document.querySelector("#form-modal");
 const addBookBtn = document.querySelector("#add-book-btn");
 const closeModalBtn = document.querySelector("#close-modal");
@@ -77,19 +65,17 @@ const submitModalBtn = document.querySelector("#submit-modal");
 
 
 addBookBtn.addEventListener("click", () => {
-    formModal.showModal();
-})
+  formModal.showModal();
+});
 closeModalBtn.addEventListener("click", () => {
-    formModal.close();
-})
+  formModal.close();
+});
 formModal.addEventListener("submit", () => {
-    const bookTitle = document.querySelector("#book-title").value;
-    const bookAuthor = document.querySelector("#book-author").value;
-    const bookPages = document.querySelector("#book-pages").value;
-    const bookRead = document.querySelector("#is-read").checked;
-    myLibrary.addBookToLibrary(bookTitle, bookAuthor, +bookPages, bookRead);
-})
-
-
-myLibrary.addBookToLibrary('The Hobbit', 'J.R.R. Tolkien', 295, false);
-
+  const newBook = new Book(
+    document.querySelector("#book-title").value,
+    document.querySelector("#book-author").value,
+    document.querySelector("#book-pages").value,
+    document.querySelector("#is-read").checked
+  );
+  myLibrary.addBook(newBook);
+});
